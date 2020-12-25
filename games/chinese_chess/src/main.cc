@@ -50,8 +50,10 @@ void GamePlay(ChessPlate* ptr_plate) {
     bool is_red_turn = true;
     char* ptr_str = new char[128];
     cin.get();
-    while (!ptr_plate->isGameOver(is_red_turn)) {
-        ptr_plate->isCheckmate();
+    while (!ptr_plate->getStatus(is_red_turn)) {
+        if (ptr_plate->isCheckmate()) {
+            cout << (result ? "將軍！\n" : "");
+        }
         ptr_plate->setIsLastOperationSucessful(false);
         while (!ptr_plate->getIsLastOperationSucessful()) {
             cout << (is_red_turn ? "紅方" : "黑方") << ": ";
@@ -64,7 +66,7 @@ void GamePlay(ChessPlate* ptr_plate) {
         is_red_turn = !is_red_turn;
         ptr_plate->storage(ptr_str);
     }
-    if (ptr_plate->isGameOver(is_red_turn) == 1) {
+    if (ptr_plate->getStatus(is_red_turn) == 1) {
         cout << "紅方勝。" << endl;
     } else {
         cout << "黑方勝。" << endl;

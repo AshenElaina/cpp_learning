@@ -61,11 +61,10 @@ bool ChessPlate::isCheckmate() {
             }
         }
     }
-    cout << (result ? "將軍！\n" : "");
     return result;
 }
 
-int ChessPlate::isGameOver(bool is_red_turn) {
+int ChessPlate::getStatus(bool is_red_turn) {
     bool is_red_king = false;
     bool is_black_king = false;
     bool is_king_kill_king = false;

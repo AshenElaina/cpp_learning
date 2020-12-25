@@ -17,7 +17,7 @@ private:
 public:
     ChessPlate();
     bool isCheckmate();
-    int isGameOver(bool is_red_turn);
+    int getStatus(bool is_red_turn);
     void pieceMove(int x, int y, int end_x, int end_y);
     void actionOperate(char* ptr_command, bool is_red);
 
