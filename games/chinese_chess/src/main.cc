@@ -1,14 +1,30 @@
 #include <iostream>
-#include <Windows.h>
 #include "include/chinese_chess__chess_piece.h"
 #include "include/chinese_chess__chess_plate.h"
 using namespace std;
+
+void sleep(int duration);
+#if __linux__ || __APPLE__ || __apple__ || __bsd__ || __unix__
+    #include <unistd.h>
+    void sleep(int duration) {
+        usleep(duration);
+    }
+#elif _WIN32 || _WIN64
+    #include <Windows.h>
+    void sleep(int duration) {
+        Sleep(duration);
+    }
+#else
+    #error "Unknown platform"
+#endif
 
 void GamePlay(ChessPlate* ptr_plate);
 void Replay(ChessPlate* ptr_plate);
 
 int main() {
-    SetConsoleOutputCP(CP_UTF8);
+    #if _WIN32 || _WIN64
+        SetConsoleOutputCP(CP_UTF8);
+    #endif
     cout << "=====================================================" << endl;
     cout << "[基於 C++ 的中國象棋終端遊戲]" << endl;
     cout << "版本：ver. 2.0.0" << endl;
@@ -82,7 +98,7 @@ void Replay(ChessPlate* ptr_plate) {
     bool is_red_turn = true;
     ptr_rep_plate->print();
     for (int i = 1; i <= count; i++) {
-        Sleep(3000);
+        sleep(3000);
         ptr_plate->getHistory(i, ptr_op);
         *(ptr_op + 4) = '\n';
         ptr_rep_plate->actionOperate(ptr_op, is_red_turn);
