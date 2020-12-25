@@ -66,7 +66,7 @@ void GamePlay(ChessPlate* ptr_plate) {
     }
     if (ptr_plate->isGameOver(is_red_turn) == 1) {
         cout << "紅方勝。" << endl;
-    } else if (ptr_plate->isGameOver(is_red_turn) == 2) {
+    } else {
         cout << "黑方勝。" << endl;
     }
     delete [] ptr_str;
